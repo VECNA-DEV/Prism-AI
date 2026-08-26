@@ -1,0 +1,45 @@
+# ============================================================
+# Prism AI — 10B Model Configuration
+# ============================================================
+# Total parameters: ~10.16 Billion
+#
+# Architecture: Decoder-only Transformer
+#   - 46 layers
+#   - GQA: 32 query heads, 8 KV heads (4:1 ratio)
+#   - SwiGLU FFN with 14336 intermediate dimension
+#   - RoPE position encoding
+#   - RMSNorm (pre-norm)
+# ============================================================
+
+# Model architecture
+hidden_size: 4096
+num_layers: 46
+num_attention_heads: 32
+num_kv_heads: 8
+intermediate_size: 14336
+vocab_size: 32000
+
+# Sequence length
+max_seq_len: 4096
+
+# RoPE
+rope_theta: 10000.0
+
+# Normalization
+rms_norm_eps: 1.0e-6
+
+# Regularization (no dropout — standard for large models)
+attention_dropout: 0.0
+hidden_dropout: 0.0
+
+# Initialization
+initializer_range: 0.02
+
+# Architecture options
+use_cache: true
+tie_word_embeddings: true
+gradient_checkpointing: true
+
+# Special tokens
+bos_token_id: 1
+eos_token_id: 2

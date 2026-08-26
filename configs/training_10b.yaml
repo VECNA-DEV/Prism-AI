@@ -1,0 +1,38 @@
+# ============================================================
+# Prism AI — 10B Training Configuration
+# ============================================================
+# Optimized for 8× A100-80GB with DeepSpeed ZeRO-3
+# ============================================================
+
+# Run identity
+run_name: "prism-10b-v1"
+
+# Steps and schedule
+max_steps: 100000           # ~200B tokens at batch_size=2M tokens/step
+warmup_steps: 2000
+learning_rate: 1.5e-4       # Peak LR (lower for larger models)
+weight_decay: 0.1
+max_grad_norm: 1.0
+
+# Batch sizes
+micro_batch_size: 2         # Per GPU per forward pass
+# Effective batch = micro_batch × grad_accum × num_gpus
+# With 8 GPUs, grad_accum=32: 2 × 32 × 8 = 512 sequences
+# At 4096 tokens/seq: 512 × 4096 = ~2M tokens per step
+
+# Intervals
+log_interval: 10            # Console/WandB logging
+eval_interval: 1000         # Validation evaluation
+checkpoint_interval: 500    # Checkpoint saving
+max_checkpoints: 5          # Keep last N checkpoints
+
+# Data paths
+data_dir: "data/tokenized"
+val_data_dir: "data/tokenized"
+checkpoint_dir: "checkpoints"
+
+# Reproducibility
+seed: 42
+
+# Monitoring
+use_wandb: true

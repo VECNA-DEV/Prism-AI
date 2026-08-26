@@ -1,0 +1,36 @@
+# ============================================================
+# Prism AI — Dependencies
+# ============================================================
+
+# Core ML
+torch>=2.1.0
+numpy>=1.24.0
+
+# Distributed Training
+deepspeed>=0.12.0
+
+# FlashAttention-2 (install separately on GPU machines)
+# pip install flash-attn --no-build-isolation
+# flash-attn>=2.3.0
+
+# Data
+datasets>=2.15.0
+sentencepiece>=0.1.99
+tokenizers>=0.15.0
+
+# Logging & Monitoring
+wandb>=0.16.0
+tqdm>=4.65.0
+
+# Configuration
+pyyaml>=6.0
+
+# Inference Serving
+fastapi>=0.104.0
+uvicorn>=0.24.0
+
+# Evaluation
+human-eval>=1.0.3
+
+# Utilities
+safetensors>=0.4.0
