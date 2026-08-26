@@ -1,0 +1,74 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "prism-ai"
+version = "0.1.0"
+description = "10B Parameter Foundation Model for Code Intelligence"
+readme = "README.md"
+authors = [{ name = "Prism AI Team" }]
+license = { text = "Apache-2.0" }
+requires-python = ">=3.9"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "torch>=2.1.0",
+    "sentencepiece>=0.1.99",
+    "deepspeed>=0.12.0",
+    "numpy>=1.24.0",
+    "datasets>=2.14.0",
+    "pyyaml>=6.0",
+    "wandb>=0.15.0",
+    "tqdm>=4.65.0",
+    "transformers>=4.35.0",
+    "accelerate>=0.24.0",
+]
+
+[project.optional-dependencies]
+serve = [
+    "fastapi>=0.104.0",
+    "uvicorn>=0.24.0",
+    "pydantic>=2.0.0",
+]
+eval = [
+    "human-eval",
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/VECNA-DEV/Prism-AI"
+Repository = "https://github.com/VECNA-DEV/Prism-AI.git"
+Documentation = "https://github.com/VECNA-DEV/Prism-AI/tree/main/docs"
+
+[tool.setuptools.packages.find]
+include = ["prism*"]
+
+[tool.black]
+line-length = 100
+target-version = ['py39', 'py310', 'py311']
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]

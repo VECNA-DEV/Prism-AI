@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  prism-serve:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: prism-ai-inference
+    ports:
+      - "8000:8000"
+    environment:
+      - PRISM_CONFIG=configs/model_10b.yaml
+      - PRISM_CHECKPOINT=/checkpoints/step_0100000
+      - PRISM_TOKENIZER=/tokenizer/prism_tokenizer.model
+      - PRISM_DEVICE=cuda
+    volumes:
+      - ../checkpoints:/checkpoints:ro
+      - ../tokenizer:/tokenizer:ro
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    restart: unless-stopped
